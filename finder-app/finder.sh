@@ -16,18 +16,19 @@ fi
 
 if [[ -d $filesdir ]];
 then
-	cd $filesdir
+	:
 else
 	echo "ERROR: Directory does not exit."
 	exit 1
 fi
 
-numfiles=$(find . -type f | wc -l)
+numfiles=$(find "$filesdir" -type f | wc -l)
 sum=0
 
-for i in $(find . -type f)
+for i in $(find "$filesdir" -type f);
 do
-	sum=$(grep -i -c $searchstr -i $i)
+	count=$(grep -c "$searchstr" "$i")
+	sum=$((sum + count))
 done
 
-echo "The number of files is ${numfiles} and the number of matching lines is ${sum}."
+echo "The number of files are ${numfiles} and the number of matching lines are ${sum}"

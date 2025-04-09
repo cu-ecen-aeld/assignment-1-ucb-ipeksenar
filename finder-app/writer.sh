@@ -14,12 +14,13 @@ else
 	exit 1
 fi
 
-echo $writestr > $writefile
+# Create the directory path if it does not exist
+mkdir -p $(dirname $writefile)
 
-if [ $? -eq 1 ];
+if echo $writestr > $writefile;
 then
+	echo "File created successfully."
+else
 	echo "ERROR: File could not be created."
 	exit 1
-else
-	exit 0
 fi
